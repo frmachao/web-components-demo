@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: silver;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+        #floating-card {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            padding: 1rem;
+            background-color: lightgray;
+            text-align: center;
+            opacity: 0;
+            /* 将元素在水平方向上进行位移（平移），使其向右移自身宽度的百分之百。 */
+            transform: translateX(110%);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        #floating-card img {
+            width: 268px;
+            height: 255px;
+            border: 1px solid rgb(181, 177, 187);
+        }
+
+        /* 选择具有 id 为 "floating-card" 并且具有 opened 类的元素。*/
+        #floating-card.opened {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div text="111"></div>
+    <div html="111"></div>
+    <div id="floating-button" onclick="toggleCard()">
+        <svg id="floating-icon-info" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </svg>
+        <svg class="hidden" id="floating-icon-close" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+        </svg>
+    </div>
+
+    <div id="floating-card">
+        <h2>Card Title</h2>
+        <img src="https://cdn.jsdelivr.net/gh/frmachao/images@blog/uPic/2021-11-09-WmerG5.jpg" alt="">
+
+    </div>
+
+    <script>
+        const floatingButton = document.getElementById('floating-button');
+        const floatingCard = document.getElementById('floating-card');
+        const floatingInfo = document.getElementById('floating-icon-info');
+        const floatingClose = document.getElementById('floating-icon-close');
+
+        function toggleCard() {
+            floatingCard.classList.toggle('opened');
+            setTimeout(() => {
+                if (floatingCard.classList.contains('opened')) {
+                    floatingInfo.classList.add('hidden');
+                    floatingClose.classList.remove('hidden');
+                } else {
+                    floatingClose.classList.add('hidden');
+                    floatingInfo.classList.remove('hidden');
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>
